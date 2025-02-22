@@ -1,5 +1,8 @@
+import Providers from "@/contexts/providers";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
+
+import Footer from "@/components/layout/footer";
 
 import "./globals.css";
 
@@ -23,9 +26,12 @@ export default function RootLayout({
       <body
         className={`${openSans.variable} flex min-h-dvh flex-col bg-neutral-200 font-sans antialiased`}
       >
-        <div className="mx-auto flex w-full max-w-md flex-1 flex-col items-center bg-background">
-          {children}
-        </div>
+        <Providers>
+          <div className="mx-auto flex w-full max-w-md flex-1 flex-col items-center bg-background">
+            {children}
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
