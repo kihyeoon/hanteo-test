@@ -11,7 +11,7 @@ export default function Navigation({ categories }: NavigationProps) {
   const { currentCategory, setCurrentCategory } = useCategory();
 
   return (
-    <nav className="w-full bg-background">
+    <nav className="sticky top-0 z-10 w-full bg-background">
       <div className="flex overflow-x-auto">
         {categories.map((category, index) => (
           <button

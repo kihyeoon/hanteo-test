@@ -1,15 +1,19 @@
 "use client";
 
-import type { Category } from "@/constants/categories";
-import { useCategory } from "@/contexts/category-context";
 import { useEffect, useState } from "react";
 
+import { LazyList } from "@/components/category/lazy-list";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
 import type { CarouselApi } from "@/components/ui/carousel";
+
+import { MusicList } from "@/features/music/components/music-list";
+
+import type { Category } from "@/constants/categories";
+import { useCategory } from "@/contexts/category-context";
 
 interface CategoryCarouselProps {
   categories: readonly Category[];
@@ -39,9 +43,9 @@ export default function CategoryCarousel({
       <CarouselContent>
         {categories.map((category) => (
           <CarouselItem key={category.id}>
-            <div className="flex min-h-96 w-full items-center justify-center">
-              <div className="text-2xl font-bold">{category.name}</div>
-            </div>
+            <LazyList className="flex h-[calc(100vh-40px)] w-full flex-col items-center justify-start overflow-y-scroll p-4">
+              <MusicList categoryId={category.id} />
+            </LazyList>
           </CarouselItem>
         ))}
       </CarouselContent>

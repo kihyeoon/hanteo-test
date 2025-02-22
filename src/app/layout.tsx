@@ -1,8 +1,9 @@
-import Providers from "@/contexts/providers";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 
 import Footer from "@/components/layout/footer";
+
+import Providers from "@/contexts/providers";
 
 import "./globals.css";
 

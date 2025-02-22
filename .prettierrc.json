@@ -25,6 +25,7 @@
     "^@/commons/(.*)$",
     "^@/app/(.*)",
     "^@/libs/(.*)$",
+    "^@/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,
