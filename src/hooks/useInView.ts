@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 
 interface UseInViewOptions {
   keepAlive?: boolean;
+  threshold?: number;
 }
 
 export function useInView(
   ref: React.RefObject<HTMLElement | null>,
   options: UseInViewOptions = {},
 ) {
+  const { keepAlive = true, threshold = 0.1 } = options;
+
   const [isInView, setIsInView] = useState(false);
   const [hasBeenVisible, setHasBeenVisible] = useState(false);
 
@@ -21,7 +24,7 @@ export function useInView(
         setIsInView(visible);
         if (visible) setHasBeenVisible(true);
       },
-      { threshold: 0.1 },
+      { threshold },
     );
 
     observer.observe(element);
@@ -29,7 +32,7 @@ export function useInView(
     return () => {
       observer.disconnect();
     };
-  }, [ref]);
+  }, [ref, threshold]);
 
-  return options.keepAlive ? isInView || hasBeenVisible : isInView;
+  return keepAlive ? isInView || hasBeenVisible : isInView;
 }

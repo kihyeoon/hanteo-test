@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { LazyList } from "@/components/category/lazy-list";
+import { InView } from "@/components/common/in-view";
 import {
   Carousel,
   CarouselContent,
@@ -43,11 +43,11 @@ export default function CategoryCarousel({
       <CarouselContent>
         {categories.map((category) => (
           <CarouselItem key={category.id}>
-            <LazyList
+            <InView
               className={`flex h-[calc(100dvh-309px)] w-full flex-col items-center justify-start overflow-y-scroll md:h-[calc(100dvh-338px)]`}
             >
               <MusicList categoryId={category.id} />
-            </LazyList>
+            </InView>
           </CarouselItem>
         ))}
       </CarouselContent>

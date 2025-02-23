@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
+import { BlurFade } from "@/components/common/blur-fade";
 import Footer from "@/components/layout/footer";
-import { BlurFade } from "@/components/ui/blur-fade";
 import { Button } from "@/components/ui/button";
 
 import ListSkeleton from "@/features/music/components/list-skeleton";
