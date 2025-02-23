@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 
 import { useMusicChart } from "@/features/music/hooks/useMusicChart";
@@ -28,7 +29,7 @@ export function MusicList({ categoryId }: MusicListProps) {
 
   return (
     <div className="flex w-full flex-col items-center gap-4">
-      <ul className="space-y-4">
+      <ul className="space-y-4 p-4">
         {tracks.map((track, index) => (
           <MusicListItem key={track.id + index} track={track} />
         ))}
@@ -38,6 +39,7 @@ export function MusicList({ categoryId }: MusicListProps) {
           {isFetchingNextPage ? "로딩중..." : "더보기"}
         </Button>
       )}
+      <Footer />
     </div>
   );
 }

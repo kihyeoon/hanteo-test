@@ -43,7 +43,7 @@ export default function CategoryCarousel({
       <CarouselContent>
         {categories.map((category) => (
           <CarouselItem key={category.id}>
-            <LazyList className="flex h-[calc(100dvh-40px)] w-full flex-col items-center justify-start overflow-y-scroll p-4">
+            <LazyList className="flex h-[calc(100dvh-338px)] w-full flex-col items-center justify-start overflow-y-scroll">
               <MusicList categoryId={category.id} />
             </LazyList>
           </CarouselItem>
