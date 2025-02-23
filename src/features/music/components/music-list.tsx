@@ -29,7 +29,7 @@ export function MusicList({ categoryId }: MusicListProps) {
 
   return (
     <div className="flex w-full flex-col items-center gap-4">
-      <ul className="space-y-4 p-4">
+      <ul className="w-full space-y-4 p-4 pb-0">
         {tracks.map((track, index) => (
           <MusicListItem key={track.id + index} track={track} />
         ))}
