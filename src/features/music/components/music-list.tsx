@@ -11,9 +11,10 @@ import { MusicListItem } from "./music-list-item";
 
 interface MusicListProps {
   categoryId: number;
+  categoryName: string;
 }
 
-export function MusicList({ categoryId }: MusicListProps) {
+export function MusicList({ categoryId, categoryName }: MusicListProps) {
   const {
     tracks,
     fetchNextPage,
@@ -21,7 +22,7 @@ export function MusicList({ categoryId }: MusicListProps) {
     isFetchingNextPage,
     isLoading,
     isError,
-  } = useMusicChart(categoryId);
+  } = useMusicChart(categoryId, categoryName);
 
   const getAnimationDelay = useCallback((index: number) => {
     const itemsPerPage = 20;

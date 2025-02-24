@@ -12,8 +12,8 @@ import type { CarouselApi } from "@/components/ui/carousel";
 
 import { MusicList } from "@/features/music/components/music-list";
 
-import type { Category } from "@/constants/categories";
 import { useCategory } from "@/contexts/category-context";
+import type { Category } from "@/types/category";
 
 interface CategoryCarouselProps {
   categories: readonly Category[];
@@ -46,7 +46,7 @@ export default function CategoryCarousel({
             <InView
               className={`flex h-[calc(100dvh-309px)] w-full flex-col items-center justify-start overflow-y-scroll md:h-[calc(100dvh-338px)]`}
             >
-              <MusicList categoryId={category.id} />
+              <MusicList categoryId={category.id} categoryName={category.name} />
             </InView>
           </CarouselItem>
         ))}

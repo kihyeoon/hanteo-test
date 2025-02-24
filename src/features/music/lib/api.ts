@@ -8,7 +8,7 @@ const PAGE_SIZE = 20;
 const MAX_PAGES = 5;
 
 export async function getChartList(
-  categoryId: number,
+  categoryName: string,
   cursor?: string,
 ): Promise<MusicChartResponse> {
   const offset = cursor ? parseInt(cursor) : 0;
@@ -22,7 +22,7 @@ export async function getChartList(
   }
 
   const params = new URLSearchParams({
-    term: "kpop",
+    term: categoryName,
     limit: String(PAGE_SIZE),
     offset: String(offset),
   });

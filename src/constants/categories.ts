@@ -1,31 +1,28 @@
-export interface Category {
-  id: number;
-  name: string;
-}
+import type { Category } from "@/types/category";
 
-export const categories: Category[] = [
+export const categories = [
   {
     id: 1,
-    name: "차트",
+    name: "kpop",
   },
   {
     id: 2,
-    name: "Whook",
+    name: "dance",
   },
   {
     id: 3,
-    name: "이벤트",
+    name: "rock",
   },
   {
     id: 4,
-    name: "뉴스",
+    name: "electronic",
   },
   {
     id: 5,
-    name: "스토어",
+    name: "pop",
   },
   {
     id: 6,
-    name: "충전소",
+    name: "classic",
   },
-] as const;
+] as const satisfies Category[];

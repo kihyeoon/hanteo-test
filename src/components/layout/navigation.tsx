@@ -2,8 +2,8 @@
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
-import type { Category } from "@/constants/categories";
 import { useCategory } from "@/contexts/category-context";
+import type { Category } from "@/types/category";
 
 interface NavigationProps {
   categories: readonly Category[];
