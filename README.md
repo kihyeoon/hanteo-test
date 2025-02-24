@@ -26,6 +26,8 @@
 - **카테고리별 콘텐츠**는 **해당 카테고리를 실제로 선택(슬라이드 진입)했을 때**만 서버에 요청합니다.
 - `InView` 컴포넌트를 구현하여 lazy loading을 선언적으로 사용했습니다.
 
+<img width="500" src="https://github.com/user-attachments/assets/b432deb6-4144-4c1f-ade9-cbf4b374eae2">
+
 #### 장점
 
 - 초기 로딩 시간 단축
