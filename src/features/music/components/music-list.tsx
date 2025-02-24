@@ -5,16 +5,22 @@ import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 
 import ListSkeleton from "@/features/music/components/list-skeleton";
-import { useMusicChart } from "@/features/music/hooks/useMusicChart";
+import { useMusicChart } from "@/features/music/hooks/use-music-chart";
+import type { MusicChartResponse } from "@/features/music/types/music";
 
 import { MusicListItem } from "./music-list-item";
 
 interface MusicListProps {
   categoryId: number;
   categoryName: string;
+  initialData?: MusicChartResponse;
 }
 
-export function MusicList({ categoryId, categoryName }: MusicListProps) {
+export function MusicList({
+  categoryId,
+  categoryName,
+  initialData,
+}: MusicListProps) {
   const {
     tracks,
     fetchNextPage,
@@ -22,7 +28,11 @@ export function MusicList({ categoryId, categoryName }: MusicListProps) {
     isFetchingNextPage,
     isLoading,
     isError,
-  } = useMusicChart(categoryId, categoryName);
+  } = useMusicChart({
+    categoryId,
+    categoryName,
+    initialData,
+  });
 
   const getAnimationDelay = useCallback((index: number) => {
     const itemsPerPage = 20;

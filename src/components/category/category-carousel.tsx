@@ -11,16 +11,20 @@ import {
 import type { CarouselApi } from "@/components/ui/carousel";
 
 import { MusicList } from "@/features/music/components/music-list";
+import { InitialMusicData } from "@/features/music/domain/initial-music-data";
+import type { MusicChartResponse } from "@/features/music/types/music";
 
 import { useCategory } from "@/contexts/category-context";
 import type { Category } from "@/types/category";
 
 interface CategoryCarouselProps {
   categories: readonly Category[];
+  initialChartData: MusicChartResponse;
 }
 
 export default function CategoryCarousel({
   categories,
+  initialChartData,
 }: CategoryCarouselProps) {
   const { currentCategory, setCurrentCategory } = useCategory();
   const [api, setApi] = useState<CarouselApi>();
@@ -41,12 +45,19 @@ export default function CategoryCarousel({
   return (
     <Carousel setApi={setApi}>
       <CarouselContent>
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <CarouselItem key={category.id}>
             <InView
               className={`flex h-[calc(100dvh-309px)] w-full flex-col items-center justify-start overflow-y-scroll md:h-[calc(100dvh-338px)]`}
             >
-              <MusicList categoryId={category.id} categoryName={category.name} />
+              <MusicList
+                categoryId={category.id}
+                categoryName={category.name}
+                initialData={InitialMusicData.getInitialDataForCategory(
+                  index,
+                  initialChartData,
+                )}
+              />
             </InView>
           </CarouselItem>
         ))}
