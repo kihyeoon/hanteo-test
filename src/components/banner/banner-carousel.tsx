@@ -3,7 +3,7 @@
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   Carousel,
@@ -63,6 +63,13 @@ const DUMMY_BANNERS: Banner[] = [
 const CAROUSEL_AUTOPLAY_DELAY_MS = 3000;
 
 export default function BannerCarousel() {
+  const plugins = useRef([
+    Autoplay({
+      delay: CAROUSEL_AUTOPLAY_DELAY_MS,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  ]);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
@@ -85,13 +92,7 @@ export default function BannerCarousel() {
           align: "center",
           loop: true,
         }}
-        plugins={[
-          Autoplay({
-            delay: CAROUSEL_AUTOPLAY_DELAY_MS,
-            stopOnInteraction: false,
-            stopOnMouseEnter: true,
-          }),
-        ]}
+        plugins={plugins.current}
         setApi={setApi}
         className="w-full"
       >
