@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { BlurFade } from "@/components/common/blur-fade";
 import Footer from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
+
+import { useInView } from "@/hooks/useInView";
 
 import ListSkeleton from "@/features/music/components/list-skeleton";
 import { useMusicChart } from "@/features/music/hooks/use-music-chart";
@@ -34,18 +35,33 @@ export function MusicList({
     initialData,
   });
 
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(loadMoreRef);
+
   const getAnimationDelay = useCallback((index: number) => {
     const itemsPerPage = 20;
     const pageIndex = index % itemsPerPage;
     return 0.25 + pageIndex * 0.05;
   }, []);
 
+  // 뷰포트에 들어왔을 때 다음 페이지 로드
+  useEffect(() => {
+    if (isInView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   if (isError) {
     return <div>오류가 발생했습니다.</div>;
   }
 
   if (isLoading) {
-    return <ListSkeleton />;
+    return (
+      <div className="flex w-full flex-col items-center gap-4">
+        <ListSkeleton />
+        <div ref={loadMoreRef} className="h-1 w-full" />
+      </div>
+    );
   }
 
   return (
@@ -67,9 +83,7 @@ export function MusicList({
           />
         )}
       </ul>
-      {hasNextPage && !isFetchingNextPage && (
-        <Button onClick={() => fetchNextPage()}>더보기</Button>
-      )}
+      {hasNextPage && <div ref={loadMoreRef} className="h-1 w-full"></div>}
       <Footer />
     </div>
   );

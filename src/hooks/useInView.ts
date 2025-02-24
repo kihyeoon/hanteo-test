@@ -9,7 +9,7 @@ export function useInView(
   ref: React.RefObject<HTMLElement | null>,
   options: UseInViewOptions = {},
 ) {
-  const { keepAlive = true, threshold = 0.1 } = options;
+  const { keepAlive = false, threshold = 0.1 } = options;
 
   const [isInView, setIsInView] = useState(false);
   const [hasBeenVisible, setHasBeenVisible] = useState(false);

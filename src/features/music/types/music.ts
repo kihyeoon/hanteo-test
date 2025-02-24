@@ -18,5 +18,5 @@ export interface ItunesSearchResponse {
 
 export interface MusicChartResponse {
   tracks: Track[];
-  nextCursor?: string;
+  nextCursor?: number;
 }

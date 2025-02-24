@@ -30,7 +30,7 @@ export function useMusicChart({
     queryKey: ["musicChart", categoryId],
     queryFn: async ({ pageParam }) => getChartList(categoryName, pageParam),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: undefined as string | undefined,
+    initialPageParam: 0,
     initialData: createInitialQueryState(initialMusicData.data),
     enabled: !initialMusicData.exists,
   });

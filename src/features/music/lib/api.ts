@@ -11,9 +11,9 @@ const MAX_PAGES = 5;
 
 export async function getChartList(
   categoryName: string,
-  cursor?: string,
+  cursor?: number,
 ): Promise<MusicChartResponse> {
-  const offset = cursor ? parseInt(cursor) : 0;
+  const offset = cursor ?? 0;
   const currentPage = Math.floor(offset / PAGE_SIZE) + 1;
 
   if (currentPage > MAX_PAGES) {
@@ -48,6 +48,6 @@ export async function getChartList(
 
   return {
     tracks,
-    nextCursor: hasNextPage ? String(offset + PAGE_SIZE) : undefined,
+    nextCursor: hasNextPage ? offset + PAGE_SIZE : undefined,
   };
 }
