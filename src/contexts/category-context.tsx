@@ -15,9 +15,9 @@ export function CategoryProvider({ children }: { children: ReactNode }) {
   const [currentCategory, setCurrentCategory] = useState(0);
 
   return (
-    <CategoryContext.Provider value={{ currentCategory, setCurrentCategory }}>
+    <CategoryContext value={{ currentCategory, setCurrentCategory }}>
       {children}
-    </CategoryContext.Provider>
+    </CategoryContext>
   );
 }
 
