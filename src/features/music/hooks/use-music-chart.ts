@@ -1,24 +1,13 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { InitialMusicData } from "@/features/music/domain/initial-music-data";
 import { getChartList } from "@/features/music/lib/api";
-import type { MusicChartResponse, Track } from "@/features/music/types/music";
-
-import { createInitialQueryState } from "@/lib/query-utils";
+import type { Track } from "@/features/music/types/music";
 
 interface UseMusicChartProps {
-  categoryId: number;
   categoryName: string;
-  initialData?: MusicChartResponse;
 }
 
-export function useMusicChart({
-  categoryId,
-  categoryName,
-  initialData,
-}: UseMusicChartProps) {
-  const initialMusicData = new InitialMusicData(initialData);
-
+export function useMusicChart({ categoryName }: UseMusicChartProps) {
   const {
     data,
     fetchNextPage,
@@ -27,12 +16,10 @@ export function useMusicChart({
     isLoading,
     isError,
   } = useInfiniteQuery({
-    queryKey: ["musicChart", categoryId],
+    queryKey: ["chartList", categoryName],
     queryFn: async ({ pageParam }) => getChartList(categoryName, pageParam),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     initialPageParam: 0,
-    initialData: createInitialQueryState(initialMusicData.data),
-    enabled: !initialMusicData.exists,
   });
 
   const tracks: Track[] = data?.pages.flatMap((page) => page.tracks) ?? [];

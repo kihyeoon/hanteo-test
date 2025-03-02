@@ -7,21 +7,14 @@ import { useInView } from "@/hooks/useInView";
 
 import ListSkeleton from "@/features/music/components/list-skeleton";
 import { useMusicChart } from "@/features/music/hooks/use-music-chart";
-import type { MusicChartResponse } from "@/features/music/types/music";
 
 import { MusicListItem } from "./music-list-item";
 
 interface MusicListProps {
-  categoryId: number;
   categoryName: string;
-  initialData?: MusicChartResponse;
 }
 
-export function MusicList({
-  categoryId,
-  categoryName,
-  initialData,
-}: MusicListProps) {
+export function MusicList({ categoryName }: MusicListProps) {
   const {
     tracks,
     fetchNextPage,
@@ -30,9 +23,7 @@ export function MusicList({
     isLoading,
     isError,
   } = useMusicChart({
-    categoryId,
     categoryName,
-    initialData,
   });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);

@@ -2,22 +2,32 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useState } from "react";
 
+import { GC_TIME, STALE_TIME } from "@/constants/react-query";
 import { CategoryProvider } from "@/contexts/category-context";
 
-interface Props {
+interface ProvidersProps {
   children: React.ReactNode;
 }
 
-const queryClient = new QueryClient();
+export default function Providers({ children }: ProvidersProps) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: STALE_TIME,
+            gcTime: GC_TIME,
+          },
+        },
+      }),
+  );
 
-const Providers = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <CategoryProvider>{children}</CategoryProvider>
     </QueryClientProvider>
   );
-};
-
-export default Providers;
+}
