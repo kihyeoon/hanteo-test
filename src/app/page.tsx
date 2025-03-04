@@ -12,6 +12,8 @@ import { categories } from "@/constants/categories";
 import ReactQueryHydration from "@/contexts/react-query-hydration";
 import { getQueryClient } from "@/lib/get-query-client";
 
+export const revalidate = 60; // 1분
+
 export default async function Home() {
   const queryClient = getQueryClient();
 
